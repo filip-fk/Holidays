@@ -52,18 +52,18 @@ namespace Holidays
         {
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
 
-            Greeting.Text = lbi.Content.ToString();
-
-            if (lbi.Content.ToString() == "Home")
+            if (home.IsSelected == true)
             {
-                Frame.Navigate(typeof(MainPage));
+                mastergrid.Visibility = Visibility.Visible;
+                cmg.Visibility = Visibility.Collapsed;
             }
 
-            else if(lbi.Content.ToString() == "Calendar")
+            if (calendar.IsSelected == true)
             {
-                Frame.Navigate(typeof(cmgrid));
+                cmg.Visibility = Visibility.Visible;
+                mastergrid.Visibility = Visibility.Collapsed;
             }
-            
+
         }
     }
 }

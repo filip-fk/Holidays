@@ -192,7 +192,7 @@
                     <ListBoxItem Name="home" IsSelected="True">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE10f;" FontSize="24"/>
-                            <TextBlock Text="Home" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="homes" Text="Home" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem Name="calendar">

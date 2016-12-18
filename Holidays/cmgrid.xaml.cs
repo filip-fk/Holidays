@@ -33,14 +33,16 @@ namespace Holidays
             
         }
 
-        public Grid item = new Grid();
+        
 
 
         private void dateadd(object sender, DatePickerValueChangedEventArgs e)
         {
+            Grid item = new Grid();
             newdateslist.Children.Add(item);
 
             TextBlock date = new TextBlock();
+            date.FontFamily = new FontFamily("segoe print");
             var now = DateTime.Now;
             var today2 = now.Day;
             var today3 = now.Month;
@@ -69,36 +71,81 @@ namespace Holidays
             stpnew.HorizontalAlignment = HorizontalAlignment.Right;
             item.Children.Add(stpnew);
 
+            CheckBox tryn = new CheckBox();
+            tryn.FontFamily = new FontFamily("segoe mdl2 assets");
+            tryn.Content = "   ";
+            tryn.VerticalAlignment = VerticalAlignment.Center;
+            tryn.FontSize = 25;
+            tryn.Foreground = new SolidColorBrush(Colors.Yellow);
+            tryn.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            stpnew.Children.Add(tryn);
+
             CheckBox chb = new CheckBox();
             chb.IsChecked = true;
+            chb.Content = "Show on Homepage  ";
             stpnew.Children.Add(chb);
-
-            Button delete = new Button();
-            delete.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-            delete.Click += deleteButton_Click;
-            stpnew.Children.Add(delete);
-
-            SymbolIcon delcont = new SymbolIcon();
-            delcont.Symbol = Symbol.Delete;
-            delete.Content = delcont;
         }
 
         private async void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog deleteFileDialog = new ContentDialog()
+            if (newdateslist.Children.Count == 0)
             {
-                Title = "Delete date?",
-                PrimaryButtonText = "Delete",
-                SecondaryButtonText = "Cancel"
-            };
 
-            ContentDialogResult result = await deleteFileDialog.ShowAsync();
+            }
 
-            // Delete the file if the user clicked the primary button. 
-            /// Otherwise, do nothing. 
-            if (result == ContentDialogResult.Primary)
+            else
             {
-                newdateslist.Children.Remove(item);
+
+                ContentDialog deleteFileDialog = new ContentDialog()
+                {
+                    Title = "Delete date?",
+                    PrimaryButtonText = "Delete",
+                    SecondaryButtonText = "Cancel"
+                };
+
+                ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+                // Delete the file if the user clicked the primary button. 
+                /// Otherwise, do nothing. 
+                if (result == ContentDialogResult.Primary)
+                {
+                    newdateslist.Children.Clear();
+                }
+            }
+        }
+
+        private void perbar_ch(object sender, RoutedEventArgs e)
+        {
+            perbargrid.Visibility = Visibility.Visible;
+        }
+
+        private async void perbar_unch(object sender, RoutedEventArgs e)
+        {
+            perbargrid.Visibility = Visibility.Collapsed;
+
+            if (newdateslist.Children.Count == 0)
+            {
+
+            }
+
+            else
+            {
+                ContentDialog deleteFileDialog = new ContentDialog()
+                {
+                    Title = "Delete date?",
+                    Content = "Do you want to delete all dates",
+                    PrimaryButtonText = "Delete",
+                    SecondaryButtonText = "Store"
+                };
+
+                ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+                // Delete the file if the user clicked the primary button. 
+                /// Otherwise, do nothing. 
+                if (result == ContentDialogResult.Primary)
+                {
+                    newdateslist.Children.Clear();
+                }
             }
         }
     }
