@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="Holidays.shoplistg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Holidays"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel>
+            <ScrollViewer  VerticalScrollBarVisibility="Hidden">
+                <StackPanel>
+                    <Grid>
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" Margin="0,0,80,0">
+                            <TextBlock x:Name="nameoflist" Text="My Shopping List" FontFamily="Tempus Sans ITC" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
+                        </ScrollViewer>
+                        <Button FontFamily="segoe mdl2 assets" Content="&#xe107;" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}"/>
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <Button x:Name="save" Visibility="Collapsed" FontFamily="segoe mdl2 assets" Content="&#xe105;" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" Margin="0,0,40,0" Click="save_click"/>
+                            <Button x:Name="saveedit" FontFamily="segoe mdl2 assets" Content="&#xe104;" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" Margin="0,0,40,0" Click="saveedit_click"/>
+                        </Grid>
+                        <TextBox x:Name="editnol" Margin="0,0,80,0" HorizontalAlignment="Center" Width="auto" PlaceholderText="List name" Visibility="Collapsed"/>
+                    </Grid>
+                    <StackPanel x:Name="list1" Margin="0,10,0,0">
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="newname" Width="auto" Visibility="Collapsed"/>
+                <Button x:Name="showaddtb" Margin="10,5,0,0" Background="{x:Null}" Click="addchb">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="segoe mdl2 assets" Text="&#xe948;" FontWeight="Bold" FontSize="20"/>
+                        <TextBlock x:Name="btntext" Text="Add item" FontFamily="Tempus Sans ITC" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

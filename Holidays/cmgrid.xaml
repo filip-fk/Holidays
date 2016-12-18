@@ -1,0 +1,82 @@
+﻿<Page
+    x:Class="Holidays.cmgrid"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Holidays"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="20,0,0,0">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="narow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="780"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1100"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="xwide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel x:Name="stporienimptnt">
+            <CalendarView x:Name="cldv" HorizontalAlignment="Left" Height="284" VerticalAlignment="Top" Width="316" Background="{x:Null}" BorderBrush="#66E6E6E6" CalendarItemBackground="#7FFFFFFF" Foreground="#CC000000" OutOfScopeBackground="#33C9C9C9" SelectedBorderBrush="#7F0078D7"/>
+            <StackPanel x:Name="settings" Margin="0,20,0,0">
+                <Grid x:Name="daystochristmas" Margin="0,20,0,0">
+                    <TextBlock HorizontalAlignment="Left" Text="Show days to Christmas" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
+                    <ToggleSwitch HorizontalAlignment="Right" FontFamily="Tempus Sans ITC" FontWeight="Bold" IsOn="True"/>
+                </Grid>
+                <StackPanel x:Name="daystocustomedate" Margin="0,20,0,0">
+                    <CheckBox HorizontalAlignment="Left" Content="Show days to custome date" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Name="dtpk" FontFamily="Tempus Sans ITC" DateChanged="dateadd"/>
+                        <Button Content="&#xe109;" FontFamily="Segoe MDL2 Assets" Background="{x:Null}" Height="30" Click="adddate"/>
+                    </StackPanel>
+                    <StackPanel x:Name="mainlist">
+                        <Border BorderBrush="#7F0078D7" BorderThickness="0,0,0,02" Margin="0,0,20,0">
+                            <TextBlock Margin="0,20,0,0" Text="Days to selected dates" FontFamily="Tempus Sans ITC"/>
+                        </Border>
+                        <ScrollViewer Height="300" HorizontalScrollBarVisibility="Hidden" Margin="0,0,20,0">
+                            <StackPanel x:Name="newdateslist" Background="#190078D7">
+                                
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
