@@ -104,25 +104,75 @@ namespace Holidays
             }
         }
 
-        private void saveedit_click(object sender, RoutedEventArgs e)
+        private void save_edit(object sender, RoutedEventArgs e)
         {
             if (nameoflist.Visibility == Visibility.Visible)
             {
                 nameoflist.Visibility = Visibility.Collapsed;
                 editnol.Visibility = Visibility.Visible;
-                saveedit.Visibility = Visibility.Collapsed;
-                save.Visibility = Visibility.Visible;
+                f1.Symbol = Symbol.Save;
+                f2.Symbol = Symbol.Cancel;
             }
 
+            else if (nameoflist.Visibility == Visibility.Collapsed)
+            {
+                nameoflist.Visibility = Visibility.Visible;
+                editnol.Visibility = Visibility.Collapsed;
+                f1.Symbol = Symbol.Edit;
+                f2.Symbol = Symbol.Delete;
+                nameoflist.Text = editnol.Text;
+            }
         }
 
-        private void save_click(object sender, RoutedEventArgs e)
+        private async void deleteitems(object sender, RoutedEventArgs e)
         {
-            nameoflist.Visibility = Visibility.Visible;
-            editnol.Visibility = Visibility.Collapsed;
-            nameoflist.Text = editnol.Text;
-            saveedit.Visibility = Visibility.Visible;
-            save.Visibility = Visibility.Collapsed;
+            if (nameoflist.Visibility == Visibility.Collapsed)
+            {
+                nameoflist.Visibility = Visibility.Visible;
+                editnol.Visibility = Visibility.Collapsed;
+                f1.Symbol = Symbol.Edit;
+                f2.Symbol = Symbol.Delete;
+            }
+
+            else if (nameoflist.Visibility == Visibility.Visible)
+            {
+                if (list1.Children.Count == 0)
+                {
+                    ContentDialog deleteFileDialog = new ContentDialog()
+                    {
+                        Title = "No songs to delete",
+                        PrimaryButtonText = "Ok"
+                    };
+
+                    ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+                    // Delete the file if the user clicked the primary button. 
+                    /// Otherwise, do nothing. 
+                    if (result == ContentDialogResult.Primary)
+                    {
+
+                    }
+                }
+
+                else
+                {
+                    ContentDialog deleteFileDialog = new ContentDialog()
+                    {
+                        Title = "Delete songs?",
+                        PrimaryButtonText = "Delete",
+                        SecondaryButtonText = "Cancel"
+                    };
+
+                    ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+                    // Delete the file if the user clicked the primary button. 
+                    /// Otherwise, do nothing. 
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        list1.Children.Clear();
+                    }
+                }
+            }
         }
     }
 }

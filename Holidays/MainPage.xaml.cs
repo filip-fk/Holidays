@@ -56,12 +56,21 @@ namespace Holidays
             {
                 mastergrid.Visibility = Visibility.Visible;
                 cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Collapsed;
             }
 
             if (calendar.IsSelected == true)
             {
-                cmg.Visibility = Visibility.Visible;
                 mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Visible;
+                shmg.Visibility = Visibility.Collapsed;
+            }
+
+            if (shoplidt.IsSelected == true)
+            {
+                mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Visible;
             }
 
         }
