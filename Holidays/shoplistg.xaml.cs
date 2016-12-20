@@ -69,6 +69,7 @@ namespace Holidays
 
         private async void deleteitems(object sender, RoutedEventArgs e)
         {
+
             if (nameoflist.Visibility == Visibility.Collapsed)
             {
                 nameoflist.Visibility = Visibility.Visible;
@@ -79,20 +80,41 @@ namespace Holidays
 
             else if (nameoflist.Visibility == Visibility.Visible)
             {
-                ContentDialog deleteFileDialog = new ContentDialog()
+                if (list1.Children.Count == 0)
                 {
-                    Title = "Delete date?",
-                    PrimaryButtonText = "Delete",
-                    SecondaryButtonText = "Cancel"
-                };
+                    ContentDialog deleteFileDialog = new ContentDialog()
+                    {
+                        Title = "No items to delete",
+                        PrimaryButtonText = "Ok"
+                    };
 
-                ContentDialogResult result = await deleteFileDialog.ShowAsync();
+                    ContentDialogResult result = await deleteFileDialog.ShowAsync();
 
-                // Delete the file if the user clicked the primary button. 
-                /// Otherwise, do nothing. 
-                if (result == ContentDialogResult.Primary)
+                    // Delete the file if the user clicked the primary button. 
+                    /// Otherwise, do nothing. 
+                    if (result == ContentDialogResult.Primary)
+                    {
+
+                    }
+                }
+
+                else
                 {
-                    list1.Children.Clear();
+                    ContentDialog deleteFileDialog = new ContentDialog()
+                    {
+                        Title = "Empty shopping list?",
+                        PrimaryButtonText = "Empty",
+                        SecondaryButtonText = "Cancel"
+                    };
+
+                    ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+                    // Delete the file if the user clicked the primary button. 
+                    /// Otherwise, do nothing. 
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        list1.Children.Clear();
+                    }
                 }
             }
         }

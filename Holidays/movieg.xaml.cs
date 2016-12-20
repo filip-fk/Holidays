@@ -140,7 +140,7 @@ namespace Holidays
                 {
                     ContentDialog deleteFileDialog = new ContentDialog()
                     {
-                        Title = "No songs to delete",
+                        Title = "No movies to delete",
                         PrimaryButtonText = "Ok"
                     };
 
@@ -158,7 +158,7 @@ namespace Holidays
                 {
                     ContentDialog deleteFileDialog = new ContentDialog()
                     {
-                        Title = "Delete songs?",
+                        Title = "Delete movies?",
                         PrimaryButtonText = "Delete",
                         SecondaryButtonText = "Cancel"
                     };
