@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -26,6 +27,7 @@ namespace Holidays
         {
             this.InitializeComponent();
 
+            /*
             var now = DateTime.Now;
             var date1n = now.Day;
             var dow = now.DayOfWeek;
@@ -139,6 +141,23 @@ namespace Holidays
                 degreesmnd1.Text = $"{ tumn }";
                 comm1.Text = $"{cloudcomm1}";
             }
+
+            */
+
+
+        }
+
+        public async void Button_Click()
+        {
+            var position = await LocationManager.GetPosition();
+
+            //ResultTextBlock.Text = $"{position.Coordinate.Latitude}" +", "+$"{position.Coordinate.Longitude}";
+
+            RootObject myWeather = await OpenWeatherMapProxy.GetWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
+
+            string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
+            ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+            degreesmnd1.Text = myWeather.name + " - " + ((int)myWeather.main.temp).ToString() + " - " + myWeather.weather[0].description;
         }
     }
 }

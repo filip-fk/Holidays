@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -116,6 +117,36 @@ namespace Holidays
                         list1.Children.Clear();
                     }
                 }
+            }
+        }
+
+        Windows.Storage.ApplicationDataContainer localSettings =
+    Windows.Storage.ApplicationData.Current.LocalSettings;
+        Windows.Storage.StorageFolder localFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+
+        private async void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            Windows.Globalization.DateTimeFormatting.DateTimeFormatter formatter = new Windows.Globalization.DateTimeFormatting.DateTimeFormatter("longtime");
+
+            StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt",
+                CreationCollisionOption.ReplaceExisting);
+            //await FileIO.WriteTextAsync(sampleFile, btntext.Text);
+            await FileIO.WriteTextAsync(sampleFile, formatter.Format(DateTime.Now));
+        }
+
+        private async void Button_Click3(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.txt");
+                String timestamp = await FileIO.ReadTextAsync(sampleFile);
+                // Data is contained in timestamp
+                time.Text = $"{timestamp}";
+            }
+            catch (Exception)
+            {
+                time.Text = "no date";
             }
         }
     }

@@ -38,6 +38,9 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
+            <Button Name="write" Content="new file" Click="Button_Click2" Margin="200,0,0,0"/>
+            <Button Name="read" Content="read file" Click="Button_Click3" Margin="200,10,0,0"/>
+            <TextBlock x:Name="time" Text=""/>
         </StackPanel>
     </Grid>
 </Page>
