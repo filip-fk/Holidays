@@ -186,12 +186,27 @@
                 <local:cmgrid/>
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="shmg" Margin="50,100,0,0" Visibility="Visible">
+        <Grid x:Name="shmg" Margin="70,100,0,0" Visibility="Visible">
             <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
                 <local:shoplistg/>
             </ScrollViewer>
-    </Grid>
-    <SplitView x:Name="spv" Margin="0,50,0,0" Grid.Row="1" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="50" HorizontalAlignment="Left" PaneBackground="#FFD9ECF8">
+        </Grid>
+        <Grid x:Name="mvg" Margin="70,100,0,0" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
+                <local:movieg/>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="msg" Margin="70,100,0,0" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
+                <local:musicg/>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="wthg" Margin="70,100,0,0" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
+                <local:weatherg/>
+            </ScrollViewer>
+        </Grid>
+        <SplitView x:Name="spv" Margin="0,50,0,0" Grid.Row="1" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="50" HorizontalAlignment="Left" PaneBackground="#FFD9ECF8">
             <SplitView.Pane>
                 <ListBox SelectionMode="Single" Name="iconslist" SelectionChanged="svp_sc" Background="{x:Null}">
                     <ListBoxItem Name="home" IsSelected="True">
