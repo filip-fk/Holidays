@@ -57,6 +57,9 @@ namespace Holidays
                 mastergrid.Visibility = Visibility.Visible;
                 cmg.Visibility = Visibility.Collapsed;
                 shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Collapsed;
             }
 
             if (calendar.IsSelected == true)
@@ -64,6 +67,9 @@ namespace Holidays
                 mastergrid.Visibility = Visibility.Collapsed;
                 cmg.Visibility = Visibility.Visible;
                 shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Collapsed;
             }
 
             if (shoplidt.IsSelected == true)
@@ -71,8 +77,40 @@ namespace Holidays
                 mastergrid.Visibility = Visibility.Collapsed;
                 cmg.Visibility = Visibility.Collapsed;
                 shmg.Visibility = Visibility.Visible;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Collapsed;
             }
 
+            if(movies.IsSelected == true)
+            {
+                mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Visible;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Collapsed;
+            }
+
+            if (music.IsSelected == true)
+            {
+                mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Visible;
+                wthg.Visibility = Visibility.Collapsed;
+            }
+
+            if (weather.IsSelected == true)
+            {
+                mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Visible;
+            }
         }
     }
 }

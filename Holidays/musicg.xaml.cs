@@ -47,60 +47,147 @@ namespace Holidays
 
                 var file = await openPicker.PickSingleFileAsync();
 
-                // mediaPlayer is a MediaElement defined in XAML
+                ContentDialog add = new ContentDialog()
+                {
+                    Title = "Add name",
+                    PrimaryButtonText = "Add",
+                    SecondaryButtonText = "Cancel",
+                    Background = new SolidColorBrush(Color.FromArgb(75, 255, 255, 255))
+                };
+
+                StackPanel grid = new StackPanel();
+                add.Content = grid;
+
+
+                TextBlock namenew = new TextBlock();
+                namenew.Text = "File name:";
+                grid.Children.Add(namenew);
+
+                TextBox nameactnew = new TextBox();
+                grid.Children.Add(nameactnew);
+
                 if (file != null)
                 {
-                    Grid newgrid = new Grid();
-                    list1.Children.Add(newgrid);
+                    ContentDialogResult result = await add.ShowAsync();
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        //add
+                        // mediaPlayer is a MediaElement defined in XAML
+                        if (file != null)
+                        {
+                            Grid newgrid = new Grid();
+                            list1.Children.Add(newgrid);
 
-                    //Button overall = new Button();
-                    //overall.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                    //overall.Flyout = new Flyout();
-                    //overall.Click += SubmitButton_Click;
-                    //newgrid.Children.Add(overall);
+                            //Button overall = new Button();
+                            //overall.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                            //overall.Flyout = new Flyout();
+                            //overall.Click += SubmitButton_Click;
+                            //newgrid.Children.Add(overall);
 
-                    //ProgressBar newprgbr = new ProgressBar();
-                    //newprgbr.Maximum = 100;
-                    //newprgbr.Value = mediaPlayer.ReadLocalValue;
-                    //newprgbr.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                    //                  newprgbr.Foreground = new SolidColorBrush(Color.FromArgb(225, 217, 236, 248));
-                    //newprgbr.Height = 22;
-                    //                    newgrid.Children.Add(newprgbr);
+                            //ProgressBar newprgbr = new ProgressBar();
+                            //newprgbr.Maximum = 100;
+                            //newprgbr.Value = mediaPlayer.ReadLocalValue;
+                            //newprgbr.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                            //                  newprgbr.Foreground = new SolidColorBrush(Color.FromArgb(225, 217, 236, 248));
+                            //newprgbr.Height = 22;
+                            //                    newgrid.Children.Add(newprgbr);
 
-                    StackPanel newstpmain = new StackPanel();
-                    newstpmain.Orientation = Orientation.Vertical;
-                    newgrid.Children.Add(newstpmain);
+                            StackPanel newstpmain = new StackPanel();
+                            newstpmain.Orientation = Orientation.Vertical;
+                            newgrid.Children.Add(newstpmain);
 
-                    StackPanel newstp = new StackPanel();
-                    newstp.Orientation = Orientation.Horizontal;
-                    newstp.HorizontalAlignment = HorizontalAlignment.Center;
-                    newstpmain.Children.Add(newstp);
+                            StackPanel newstp = new StackPanel();
+                            newstp.Orientation = Orientation.Horizontal;
+                            newstp.HorizontalAlignment = HorizontalAlignment.Center;
+                            newstpmain.Children.Add(newstp);
 
-                    SymbolIcon syi = new SymbolIcon();
-                    syi.Symbol = Symbol.Audio;
-                    syi.HorizontalAlignment = HorizontalAlignment.Center;
-                    newstp.Children.Add(syi);
+                            SymbolIcon syi = new SymbolIcon();
+                            syi.Symbol = Symbol.Audio;
+                            syi.HorizontalAlignment = HorizontalAlignment.Center;
+                            newstp.Children.Add(syi);
 
-                    TextBlock newbtn = new TextBlock();
-                    newbtn.FontFamily = new FontFamily("Tempus Sans ITC");
-                    newbtn.Text = "    " + file.Name;
-                    newbtn.HorizontalAlignment = HorizontalAlignment.Center;
-                    newstp.Children.Add(newbtn);
+                            TextBlock newbtn = new TextBlock();
+                            newbtn.FontFamily = new FontFamily("Tempus Sans ITC");
+                            newbtn.Text = "    " + nameactnew.Text;
+                            newbtn.HorizontalAlignment = HorizontalAlignment.Center;
+                            newstp.Children.Add(newbtn);
 
-                    MediaPlayerElement newmpe = new MediaPlayerElement();
-                    newmpe.AreTransportControlsEnabled = true;
-                    newmpe.Source = MediaSource.CreateFromStorageFile(file);
-                    newmpe.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                    newstpmain.Children.Add(newmpe);
+                            MediaPlayerElement newmpe = new MediaPlayerElement();
+                            newmpe.AreTransportControlsEnabled = true;
+                            newmpe.Source = MediaSource.CreateFromStorageFile(file);
+                            newmpe.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                            //newmpe.
+                            newstpmain.Children.Add(newmpe);
 
-                    //Border spliter = new Border();
-                    //spliter.BorderThickness = new Thickness(2, 1, 0, 0);
-                    //newstpmain.Children.Add(spliter);
+                            //Border spliter = new Border();
+                            //spliter.BorderThickness = new Thickness(2, 1, 0, 0);
+                            //newstpmain.Children.Add(spliter);
 
 
-                    //ProgressBar npb = new ProgressBar();
-                    //pb.Value = mediaPlayer.AudioStreamCount;
-                    //newstp.Children.Add(npb);
+                            //ProgressBar npb = new ProgressBar();
+                            //pb.Value = mediaPlayer.AudioStreamCount;
+                            //newstp.Children.Add(npb);
+                        }
+                    }
+                    else
+                    {
+                        //cancel
+                        // mediaPlayer is a MediaElement defined in XAML
+                        if (file != null)
+                        {
+                            Grid newgrid = new Grid();
+                            list1.Children.Add(newgrid);
+
+                            //Button overall = new Button();
+                            //overall.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                            //overall.Flyout = new Flyout();
+                            //overall.Click += SubmitButton_Click;
+                            //newgrid.Children.Add(overall);
+
+                            //ProgressBar newprgbr = new ProgressBar();
+                            //newprgbr.Maximum = 100;
+                            //newprgbr.Value = mediaPlayer.ReadLocalValue;
+                            //newprgbr.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                            //                  newprgbr.Foreground = new SolidColorBrush(Color.FromArgb(225, 217, 236, 248));
+                            //newprgbr.Height = 22;
+                            //                    newgrid.Children.Add(newprgbr);
+
+                            StackPanel newstpmain = new StackPanel();
+                            newstpmain.Orientation = Orientation.Vertical;
+                            newgrid.Children.Add(newstpmain);
+
+                            StackPanel newstp = new StackPanel();
+                            newstp.Orientation = Orientation.Horizontal;
+                            newstp.HorizontalAlignment = HorizontalAlignment.Center;
+                            newstpmain.Children.Add(newstp);
+
+                            SymbolIcon syi = new SymbolIcon();
+                            syi.Symbol = Symbol.Audio;
+                            syi.HorizontalAlignment = HorizontalAlignment.Center;
+                            newstp.Children.Add(syi);
+
+                            TextBlock newbtn = new TextBlock();
+                            newbtn.FontFamily = new FontFamily("Tempus Sans ITC");
+                            newbtn.Text = "    " + file.Name;
+                            newbtn.HorizontalAlignment = HorizontalAlignment.Center;
+                            newstp.Children.Add(newbtn);
+
+                            MediaPlayerElement newmpe = new MediaPlayerElement();
+                            newmpe.AreTransportControlsEnabled = true;
+                            newmpe.Source = MediaSource.CreateFromStorageFile(file);
+                            newmpe.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                            newstpmain.Children.Add(newmpe);
+
+                            //Border spliter = new Border();
+                            //spliter.BorderThickness = new Thickness(2, 1, 0, 0);
+                            //newstpmain.Children.Add(spliter);
+
+
+                            //ProgressBar npb = new ProgressBar();
+                            //pb.Value = mediaPlayer.AudioStreamCount;
+                            //newstp.Children.Add(npb);
+                        }
+                    }
                 }
             }
         }
