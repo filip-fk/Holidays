@@ -15,7 +15,7 @@ namespace Holidays
         public async static Task<RootObject> GetWeather(double lat, double lon)
         {
             var http = new HttpClient();
-            var response = await http.GetAsync("http://api.openweathermap.org/data/2.5/weather?lat=42.68&lon=-23.29&units=metric&appid=2da7c8ae96835b5e0cfbc7d1db170bcd");
+            var response = await http.GetAsync("http://api.openweathermap.org/data/2.5/weather?lat=42.685874&lon=23.295654&units=metric&appid=2da7c8ae96835b5e0cfbc7d1db170bcd");
             var result = await response.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 

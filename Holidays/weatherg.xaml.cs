@@ -27,7 +27,7 @@ namespace Holidays
         {
             this.InitializeComponent();
 
-            /*
+            
             var now = DateTime.Now;
             var date1n = now.Day;
             var dow = now.DayOfWeek;
@@ -86,7 +86,7 @@ namespace Holidays
             date3.Text = $"{date1n + 2}";
             date4.Text = $"{date1n + 3}";
 
-
+            /*
             Random rnd = new Random();
 
             string[] mystrings = "snow|snow|snow|snow|sun|cloud|cloud|cloud|cloud|cloud|cloud".Split('|');
@@ -144,7 +144,7 @@ namespace Holidays
 
             */
 
-
+            Button_Click();
         }
 
         public async void Button_Click()
@@ -156,8 +156,25 @@ namespace Holidays
             RootObject myWeather = await OpenWeatherMapProxy.GetWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
 
             string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
-            ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd1.Text = myWeather.name + " - " + ((int)myWeather.main.temp).ToString() + " - " + myWeather.weather[0].description;
+            ResultImage1.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+            degreesmnd1.Text =((int)myWeather.main.temp_min - 1).ToString();
+            degreesmxd1.Text =((int)myWeather.main.temp_max + 1).ToString();
+            comm1.Text = myWeather.weather[0].description;
+
+            ResultImage2.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+            degreesmnd2.Text = ((int)myWeather.main.temp_min - 1).ToString();
+            degreesmxd2.Text = ((int)myWeather.main.temp_max + 1).ToString();
+            comm2.Text = myWeather.weather[0].description;
+
+            ResultImage3.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+            degreesmnd3.Text = ((int)myWeather.main.temp_min - 1).ToString();
+            degreesmxd3.Text = ((int)myWeather.main.temp_max + 1).ToString();
+            comm3.Text = myWeather.weather[0].description;
+
+            ResultImage4.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+            degreesmnd4.Text = ((int)myWeather.main.temp_min - 1).ToString();
+            degreesmxd4.Text = ((int)myWeather.main.temp_max + 1).ToString();
+            comm4.Text = myWeather.weather[0].description;
         }
     }
 }

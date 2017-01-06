@@ -31,12 +31,13 @@ namespace Holidays
             ReadTimestamp();
         }
 
-        StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        
 
         async void ReadTimestamp()
         {
             try
             {
+                StorageFolder localFolder = ApplicationData.Current.LocalFolder;
                 StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.cs");
                 String timestamp = await FileIO.ReadTextAsync(sampleFile);
                 // Data is contained in timestamp

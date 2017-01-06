@@ -175,7 +175,7 @@
                             <TextBlock Text="Weather (not accurate)" FontFamily="Tempus Sans ITC" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                         </StackPanel>
                         <ScrollViewer Margin="0,40,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-                            <local:weatherg Margin="0,0,0,0"/>
+                            <local:weatherg/>
                         </ScrollViewer>
                     </Grid>
                 </Grid>
