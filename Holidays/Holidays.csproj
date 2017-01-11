@@ -116,11 +116,15 @@
     </Compile>
     <Compile Include="OpenWeatherMapProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="savedvideoid.cs" />
     <Compile Include="shoplistg.xaml.cs">
       <DependentUpon>shoplistg.xaml</DependentUpon>
     </Compile>
     <Compile Include="weatherg.xaml.cs">
       <DependentUpon>weatherg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wthgrid.xaml.cs">
+      <DependentUpon>wthgrid.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\snow4.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Weather\01d.png" />
     <Content Include="Assets\Weather\01n.png" />
     <Content Include="Assets\Weather\02d.png" />
@@ -195,6 +200,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="wthgrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

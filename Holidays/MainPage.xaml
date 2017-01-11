@@ -92,14 +92,14 @@
         </VisualStateManager.VisualStateGroups>
         <Grid VerticalAlignment="Top" Height="50" Background="#3300A2FF">
             <Button Height="50" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#3300A2FF" Content="&#xE700;" FontFamily="segoe mdl2 assets" FontSize="25" Click="opensplitview"/>
-            <StackPanel Orientation="Horizontal" Height="50" Width="200" HorizontalAlignment="Right" BorderBrush="Black">
+            <!--<StackPanel Orientation="Horizontal" Height="50" Width="200" HorizontalAlignment="Right" BorderBrush="Black">
                 <Border BorderBrush="#4C00A0FF" BorderThickness="2" Height="40" Width="190">
                     <StackPanel Orientation="Horizontal">
                         <TextBox HorizontalAlignment="Left" Height="40" Width="150" PlaceholderText="Search ..." FontSize="15" FontFamily="Tempus Sans ITC" BorderBrush="{x:Null}" BorderThickness="2,2,0,2"/>
                         <Button FontFamily="segoe mdl2 assets" Content="&#xE094;" Width="40" Height="40" Background="#FFC4E4F7"/>
                     </StackPanel>
                 </Border>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
         <TextBlock x:Name="Greeting" Margin="0,55,0,0" Text="" FontSize="22" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Tempus Sans ITC" FontWeight="Bold"/>
         <ScrollViewer Margin="0,50,0,0" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="200">
@@ -203,7 +203,7 @@
         </Grid>
         <Grid x:Name="wthg" Margin="70,100,0,0" Visibility="Collapsed">
             <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
-                <local:weatherg/>
+                <local:wthgrid/>
             </ScrollViewer>
         </Grid>
         <SplitView x:Name="spv" Margin="0,50,0,0" Grid.Row="1" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="50" HorizontalAlignment="Left" PaneBackground="#FFD9ECF8">

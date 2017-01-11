@@ -79,7 +79,10 @@ namespace Holidays
                 newcheckbox.Content = newname.Text;
                 //newcheckbox.Content = $"{name10}";
                 //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
-                await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
+                //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
+                string lines = (newcheckbox.Content).ToString();
+                await FileIO.WriteTextAsync(sampleFile, $"{lines}");
+                //File.WriteAllLines(sampleFile, $"{lines}");
                 list1.Children.Add(newcheckbox);
             }
 
@@ -166,30 +169,5 @@ namespace Holidays
     Windows.Storage.ApplicationData.Current.LocalSettings;
         Windows.Storage.StorageFolder localFolder =
             Windows.Storage.ApplicationData.Current.LocalFolder;
-
-        private async void Button_Click2(object sender, RoutedEventArgs e)
-        {
-            Windows.Globalization.DateTimeFormatting.DateTimeFormatter formatter = new Windows.Globalization.DateTimeFormatting.DateTimeFormatter("longtime");
-
-            StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt",
-                CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(sampleFile, btntext.Text);
-            await FileIO.WriteTextAsync(sampleFile, formatter.Format(DateTime.Now));
-        }
-
-        private async void Button_Click3(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.txt");
-                String timestamp = await FileIO.ReadTextAsync(sampleFile);
-                // Data is contained in timestamp
-                time.Text = $"{timestamp}";
-            }
-            catch (Exception)
-            {
-                time.Text = "no date";
-            }
-        }
     }
 }

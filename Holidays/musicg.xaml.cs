@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using MyToolkit.Multimedia;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -221,6 +222,7 @@ namespace Holidays
                 nameoflist.Text = editnol.Text;
             }
         }
+        
 
         private async void deleteitems(object sender, RoutedEventArgs e)
         {
@@ -269,6 +271,71 @@ namespace Holidays
                     {
                         list1.Children.Clear();
                     }
+                }
+            }
+        }
+
+
+        StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        
+
+        private async void play(object sender, RoutedEventArgs e)
+        {
+            var uriid = vdid.Text;
+
+            if (uriid != null)
+            {
+                ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
+                StorageFile sampleFile = await localFolder.CreateFileAsync("savedvideoid.cs", CreationCollisionOption.ReplaceExisting);
+
+                //RootObject1.
+
+                string lines = (vdid.Text).ToString();
+                await FileIO.WriteTextAsync(sampleFile, $"{lines}");
+
+
+                video.HorizontalAlignment = HorizontalAlignment.Center;
+
+                StackPanel newstp = new StackPanel();
+                newstp.Orientation = Orientation.Horizontal;
+                newstp.HorizontalAlignment = HorizontalAlignment.Center;
+                video.Children.Add(newstp);
+
+                StackPanel newstpforvideo = new StackPanel();
+                newstpforvideo.Orientation = Orientation.Vertical;
+                newstpforvideo.HorizontalAlignment = HorizontalAlignment.Center;
+                newstp.Children.Add(newstpforvideo);
+
+                StackPanel newstp1 = new StackPanel();
+                newstp1.Orientation = Orientation.Horizontal;
+                newstp1.HorizontalAlignment = HorizontalAlignment.Center;
+                newstpforvideo.Children.Add(newstp1);
+
+                SymbolIcon syi = new SymbolIcon();
+                syi.Symbol = Symbol.Audio;
+                syi.HorizontalAlignment = HorizontalAlignment.Left;
+                newstp1.Children.Add(syi);
+
+                TextBlock newbtn = new TextBlock();
+                newbtn.FontFamily = new FontFamily("Tempus Sans ITC");
+                newbtn.HorizontalAlignment = HorizontalAlignment.Left;
+                newstp1.Children.Add(newbtn);
+
+                MediaPlayerElement ytbplayer = new MediaPlayerElement();
+                ytbplayer.AreTransportControlsEnabled = true;
+                ytbplayer.Width = 640;
+                ytbplayer.Height = 360;
+                ytbplayer.HorizontalAlignment = HorizontalAlignment.Center;
+                newstpforvideo.Children.Add(ytbplayer);
+                
+                ytbplayer.Visibility = Visibility.Visible;
+                var videoUri = await YouTube.GetVideoUriAsync($"{uriid}", YouTubeQuality.QualityHigh);
+                var nameofvideoyt = await YouTube.GetVideoTitleAsync($"{uriid}");
+                if (videoUri != null)
+                {
+                    ytbplayer.Source = MediaSource.CreateFromUri(videoUri.Uri);
+                    ytbplayer.AutoPlay = true;
+                    newbtn.Text = "    " + nameofvideoyt;
                 }
             }
         }
