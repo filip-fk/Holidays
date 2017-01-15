@@ -123,6 +123,9 @@
     <Compile Include="weatherg.xaml.cs">
       <DependentUpon>weatherg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="weatherhourly.xaml.cs">
+      <DependentUpon>weatherhourly.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wthgrid.xaml.cs">
       <DependentUpon>wthgrid.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="weatherg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="weatherhourly.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,13 +29,21 @@ namespace Holidays
         {
             this.InitializeComponent();
         }
-
+        /*
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if (rectangleItems.Items.Count > 0)
             {
                 rectangleItems.Items.RemoveAt(0);
             }
+            
+            Rectangle rect10 = new Rectangle();
+            rect10.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
+            rect10.Width = 100;
+            rect10.Height = 100;
+            rectangleItems.Items.Add(rect10);
         }
+    */
     }
 }

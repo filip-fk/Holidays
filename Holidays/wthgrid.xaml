@@ -80,7 +80,7 @@
                             </TransitionCollection>
                         </Grid.Transitions>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
-                        <local:weatherg HorizontalAlignment="Center"/>
+                        <local:weatherhourly HorizontalAlignment="Center"/>
                     </ScrollViewer>
                 </Grid>
                 </StackPanel>

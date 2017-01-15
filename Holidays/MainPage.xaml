@@ -253,7 +253,7 @@
                     </ListBoxItem>
                     <ListBoxItem Name="ink">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xef15;" FontSize="24"/>
+                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xedc6;" FontSize="24"/>
                             <TextBlock Text="Ink workplace" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
                         </StackPanel>
                     </ListBoxItem>
