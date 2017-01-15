@@ -26,6 +26,11 @@ namespace Holidays
         {
             this.InitializeComponent();
 
+            inkCanvas.InkPresenter.InputDeviceTypes =
+        Windows.UI.Core.CoreInputDeviceTypes.Mouse |
+        Windows.UI.Core.CoreInputDeviceTypes.Pen |
+        Windows.UI.Core.CoreInputDeviceTypes.Touch;
+
             var now = DateTime.Now;
             var greeting =
                 now.Hour < 12 ? "Good morning" :
@@ -126,6 +131,14 @@ namespace Holidays
                 msg.Visibility = Visibility.Collapsed;
                 wthg.Visibility = Visibility.Collapsed;
                 inkg.Visibility = Visibility.Visible;
+
+
+                /*
+                 inkg.Height = master10.Height - 100;
+                inkg.Width = master10.Width - 70;
+                 inkg.HorizontalAlignment = HorizontalAlignment.Right;
+                inkg.VerticalAlignment = VerticalAlignment.Bottom;
+                 */
             }
         }
     }

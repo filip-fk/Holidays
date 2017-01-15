@@ -19,28 +19,71 @@
                             <TextBlock Text="°" Margin="5,0,0,0" FontFamily="Tempus Sans ITC" FontSize="40"/>
                         </StackPanel>
                     </Grid>
+                    <StackPanel VerticalAlignment="Center">
+                        <Button Content="C°" Height="40" Width="40" Background="{x:Null}" BorderThickness="0,0,0,0.5" BorderBrush="Black" FontFamily="Tempus Sans ITC" FontWeight="Bold" FontSize="25"/>
+                        <Button Content="F°" Height="40" Width="40" Background="{x:Null}" BorderThickness="0,0.5,0,0" BorderBrush="Black" FontFamily="Tempus Sans ITC"/>
+                    </StackPanel>
                 </StackPanel>
                 <TextBlock x:Name="comm1" Text="---" Margin="5,10,0,0" FontFamily="Tempus Sans ITC" FontSize="25" HorizontalAlignment="Center"/>
                 <TextBlock x:Name="update" Text="-- --:--" HorizontalAlignment="Center"  FontFamily="Tempus Sans ITC" FontWeight="Bold"/>
                 <Grid Margin="0,20,0,0" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock Text="Barometer" FontFamily="Tempus Sans ITC"/>
-                        <TextBlock x:Name="Preasure" FontFamily="Tempus Sans ITC"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="150,0,120,0" HorizontalAlignment="Center">
-                        <TextBlock Text="Wind" FontFamily="Tempus Sans ITC"/>
-                        <TextBlock x:Name="windspeed" FontFamily="Tempus Sans ITC"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Text="Humidity" FontFamily="Tempus Sans ITC"/>
-                        <TextBlock x:Name="humidity" FontFamily="Tempus Sans ITC"/>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="Barometer" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="Preasure" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="20,0" HorizontalAlignment="Center">
+                            <TextBlock Text="Wind" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="windspeed" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Humidity" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="humidity" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
-                <Grid HorizontalAlignment="Center">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+                <Grid Margin="0,20,0,0" HorizontalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="Feels like" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="feelslike" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="20,0" HorizontalAlignment="Center">
+                            <TextBlock Text="Visbility" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="visibility" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Dew point" FontFamily="Tempus Sans ITC"/>
+                            <TextBlock x:Name="dewpoint" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Daily" FontFamily="Tempus Sans ITC" FontSize="25" Margin="15,10,0,-10" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0,0,20,0">
+                        <Grid.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition/>
+                            </TransitionCollection>
+                        </Grid.Transitions>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+                            <local:weatherg HorizontalAlignment="Center"/>
+                        </ScrollViewer>
+                    </Grid>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" Margin="0,20,0,0">
+                <TextBlock Text="Hourly" FontFamily="Tempus Sans ITC" FontSize="25" Margin="20,10,0,-10" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0,0,20,0">
+                        <Grid.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition/>
+                            </TransitionCollection>
+                        </Grid.Transitions>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
                         <local:weatherg HorizontalAlignment="Center"/>
                     </ScrollViewer>
                 </Grid>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

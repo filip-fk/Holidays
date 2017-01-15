@@ -51,6 +51,11 @@ namespace Holidays
             windspeed.Text ="  "+ ((int)myWeather.list[0].wind.speed).ToString() + " km/h";
             humidity.Text = "  " + (myWeather.list[0].main.humidity).ToString() + " %";
             Preasure.Text = "  " + ((int)myWeather.list[0].main.pressure).ToString() + " mb";
+            feelslike.Text = ((int)myWeather.list[0].main.temp_max-5).ToString();
+            dewpoint.Text = ((int)myWeather.list[0].main.temp_max-2).ToString();
+            visibility.Text = "  " + "5" + " km";
+
+            //degreesmnd1.Text = "  " + ((((int)myWeather.list[0].main.temp_max*9)/5+32).ToString());
         }
     }
 }

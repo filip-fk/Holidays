@@ -101,9 +101,6 @@
     <Compile Include="cmgrid.xaml.cs">
       <DependentUpon>cmgrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="inkgrid.xaml.cs">
-      <DependentUpon>inkgrid.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LocationManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -176,10 +173,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="cmgrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="inkgrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
