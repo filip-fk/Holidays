@@ -206,6 +206,11 @@
                 <local:wthgrid/>
             </ScrollViewer>
         </Grid>
+        <Grid x:Name="inkg" Margin="70,100,0,0" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top">
+                <local:inkgrid/>
+            </ScrollViewer>
+        </Grid>
         <SplitView x:Name="spv" Margin="0,50,0,0" Grid.Row="1" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="50" HorizontalAlignment="Left" PaneBackground="#FFD9ECF8">
             <SplitView.Pane>
                 <ListBox SelectionMode="Single" Name="iconslist" SelectionChanged="svp_sc" Background="{x:Null}">
@@ -243,6 +248,12 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="segoe mdl2 assets" Text="&#xec8a;" FontSize="24"/>
                             <TextBlock Text="Weather" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Name="ink">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xef15;" FontSize="24"/>
+                            <TextBlock Text="Ink workplace" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
                         </StackPanel>
                     </ListBoxItem>
                 </ListBox>

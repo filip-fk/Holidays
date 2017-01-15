@@ -60,6 +60,7 @@ namespace Holidays
                 mvg.Visibility = Visibility.Collapsed;
                 msg.Visibility = Visibility.Collapsed;
                 wthg.Visibility = Visibility.Collapsed;
+                inkg.Visibility = Visibility.Collapsed;
             }
 
             if (calendar.IsSelected == true)
@@ -70,6 +71,7 @@ namespace Holidays
                 mvg.Visibility = Visibility.Collapsed;
                 msg.Visibility = Visibility.Collapsed;
                 wthg.Visibility = Visibility.Collapsed;
+                inkg.Visibility = Visibility.Collapsed;
             }
 
             if (shoplidt.IsSelected == true)
@@ -80,6 +82,7 @@ namespace Holidays
                 mvg.Visibility = Visibility.Collapsed;
                 msg.Visibility = Visibility.Collapsed;
                 wthg.Visibility = Visibility.Collapsed;
+                inkg.Visibility = Visibility.Collapsed;
             }
 
             if(movies.IsSelected == true)
@@ -90,6 +93,7 @@ namespace Holidays
                 mvg.Visibility = Visibility.Visible;
                 msg.Visibility = Visibility.Collapsed;
                 wthg.Visibility = Visibility.Collapsed;
+                inkg.Visibility = Visibility.Collapsed;
             }
 
             if (music.IsSelected == true)
@@ -100,6 +104,7 @@ namespace Holidays
                 mvg.Visibility = Visibility.Collapsed;
                 msg.Visibility = Visibility.Visible;
                 wthg.Visibility = Visibility.Collapsed;
+                inkg.Visibility = Visibility.Collapsed;
             }
 
             if (weather.IsSelected == true)
@@ -110,6 +115,17 @@ namespace Holidays
                 mvg.Visibility = Visibility.Collapsed;
                 msg.Visibility = Visibility.Collapsed;
                 wthg.Visibility = Visibility.Visible;
+                inkg.Visibility = Visibility.Collapsed;
+            }
+            if (ink.IsSelected == true)
+            {
+                mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Collapsed;
+                inkg.Visibility = Visibility.Visible;
             }
         }
     }
