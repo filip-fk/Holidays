@@ -47,18 +47,18 @@
                 <Rectangle Fill="Blue" Width="100" Height="100" Margin="10"/>
             </ItemsControl.Items>
         </ItemsControl>
-        -->
+        
 
         <Grid Name="day1" Height="155" Width="120" HorizontalAlignment="Left" Margin="10">
             <StackPanel  Height="150" Width="120">
                 <StackPanel Orientation="Horizontal" Margin="-10">
-                    <Image x:Name="ResultImage1" Height="50" Width="50" HorizontalAlignment="Left"/>
+                    <Image x:Name="ResultImage1" Margin="10,10,0,0" Height="50" Width="50" HorizontalAlignment="Left" Source="Assets/Weather/01n.png"/>
                     <Grid Margin="20,10,0,0" HorizontalAlignment="Left">
                         <TextBlock x:Name="degreesmxd1" Text="-" HorizontalAlignment="Left" Margin="10,0,0,0" FontFamily="Tempus Sans ITC" FontSize="20" FontWeight="Bold"/>
                         <TextBlock Text="°" Margin="30,0,0,0" FontFamily="Tempus Sans ITC"/>
                     </Grid>
                 </StackPanel>
-                <TextBlock x:Name="comm1" Text="---" Margin="5,10,0,0" FontFamily="Tempus Sans ITC" FontSize="20"/>
+                <TextBlock x:Name="comm1" Text="-" Margin="5,10,0,0" FontFamily="Tempus Sans ITC" FontSize="20"/>
                 <StackPanel BorderThickness="0,0,0,1">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="5,0" Text="&#xeb42;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" FontSize="10"/>
@@ -74,9 +74,21 @@
                     </StackPanel>
                 </StackPanel>
                 <Grid Margin="0,10" BorderBrush="Black" BorderThickness="0,1,0,0">
-                    <TextBlock x:Name="timeofup1" Text="--" Margin="0,5" FontFamily="Tempus Sans ITC"/>
+                    <TextBlock x:Name="timeofup1" Text="-" Margin="0,5" FontFamily="Tempus Sans ITC"/>
                 </Grid>
             </StackPanel>
+        </Grid>
+        -->
+
+        <Grid>
+            <StackPanel x:Name="HeaderPanel" VerticalAlignment="Top">
+                <Button x:Name="recognize" Content="Recognize" Margin="10,10,0,0"/>
+                <StackPanel x:Name="btnholder" Orientation="Horizontal" Margin="10,10"/>
+                <TextBlock x:Name="recognitionResult" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,10,0,0"/>
+            </StackPanel>
+            <Grid Margin="0,80,0,0">
+                <InkCanvas x:Name="inkCanvas"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

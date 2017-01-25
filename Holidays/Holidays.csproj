@@ -139,6 +139,7 @@
   <ItemGroup>
     <Content Include="Assets\snow4.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
     <Content Include="Assets\Weather\01d.png" />
     <Content Include="Assets\Weather\01n.png" />
     <Content Include="Assets\Weather\02d.png" />

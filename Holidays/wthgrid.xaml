@@ -20,8 +20,8 @@
                         </StackPanel>
                     </Grid>
                     <StackPanel VerticalAlignment="Center">
-                        <Button Content="C°" Height="40" Width="40" Background="{x:Null}" BorderThickness="0,0,0,0.5" BorderBrush="Black" FontFamily="Tempus Sans ITC" FontWeight="Bold" FontSize="25"/>
-                        <Button Content="F°" Height="40" Width="40" Background="{x:Null}" BorderThickness="0,0.5,0,0" BorderBrush="Black" FontFamily="Tempus Sans ITC"/>
+                        <TextBlock x:Name="nowt" Text="  C°" Height="40" Width="40" HorizontalAlignment="Center" FontFamily="Tempus Sans ITC" FontWeight="Bold" FontSize="25"/>
+                        <Button x:Name="couldbt" Content="F°" Height="40" Width="40" Background="{x:Null}" BorderThickness="0,1,0,0" BorderBrush="Black" FontFamily="Tempus Sans ITC" Click="ftoc_ctof"/>
                     </StackPanel>
                 </StackPanel>
                 <TextBlock x:Name="comm1" Text="---" Margin="5,10,0,0" FontFamily="Tempus Sans ITC" FontSize="25" HorizontalAlignment="Center"/>
