@@ -9,7 +9,7 @@
 
     <Grid x:Name="master10">
         <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="Assets/snow4.png"/>
+            <ImageBrush x:Name="master10im" Stretch="UniformToFill" ImageSource="Assets/snow4.png"/>
         </Grid.Background>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -92,14 +92,8 @@
         </VisualStateManager.VisualStateGroups>
         <Grid VerticalAlignment="Top" Height="50" Background="#3300A2FF">
             <Button Height="50" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#3300A2FF" Content="&#xE700;" FontFamily="segoe mdl2 assets" FontSize="25" Click="opensplitview"/>
-            <!--<StackPanel Orientation="Horizontal" Height="50" Width="200" HorizontalAlignment="Right" BorderBrush="Black">
-                <Border BorderBrush="#4C00A0FF" BorderThickness="2" Height="40" Width="190">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox HorizontalAlignment="Left" Height="40" Width="150" PlaceholderText="Search ..." FontSize="15" FontFamily="Tempus Sans ITC" BorderBrush="{x:Null}" BorderThickness="2,2,0,2"/>
-                        <Button FontFamily="segoe mdl2 assets" Content="&#xE094;" Width="40" Height="40" Background="#FFC4E4F7"/>
-                    </StackPanel>
-                </Border>
-            </StackPanel>-->
+            <AutoSuggestBox VerticalAlignment="Center" Margin="0,0,5,0" PlaceholderText="Search" QueryIcon="Find" Width="200" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" SuggestionChosen="AutoSuggestBox_SuggestionChosen" HorizontalAlignment="Right"/>
+            
         </Grid>
         <TextBlock x:Name="Greeting" Margin="0,55,0,0" Text="" FontSize="22" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Tempus Sans ITC" FontWeight="Bold"/>
         <ScrollViewer Margin="0,50,0,0" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="200">
@@ -130,8 +124,10 @@
                 </Button>
             </StackPanel>
         </ScrollViewer>
-        <TextBlock Text="Days to Christmas :" HorizontalAlignment="Right" FontSize="20" VerticalAlignment="Top" Margin="0,60,50,0" FontFamily="Tempus Sans ITC" FontWeight="Bold"/>
-        <TextBlock x:Name="days" Text="22" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Tempus Sans ITC" FontSize="30" FontWeight="Bold" Margin="0,55,10,0"/>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,50,10,0">
+            <TextBlock Text="Days to Christmas :" HorizontalAlignment="Right" FontSize="20" VerticalAlignment="Top" Margin="0,10,0,0" FontFamily="Tempus Sans ITC" FontWeight="Bold"/>
+            <TextBlock x:Name="days" Text="22" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Tempus Sans ITC" FontSize="30" FontWeight="Bold" Margin="10,5,0,0"/>
+        </StackPanel>
         <Grid x:Name="mastergrid" Margin="50,100,0,0" Visibility="Collapsed">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <Grid>
@@ -207,10 +203,32 @@
             </ScrollViewer>
         </Grid>
         <Grid x:Name="inkg" Margin="70,100,0,0" Visibility="Collapsed">
+            <Grid x:Name="backg" Background="White" Visibility="Collapsed"/>
             <InkCanvas x:Name="inkCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <InkToolbar x:Name="inkToolbar"
-          VerticalAlignment="Top"
-          TargetInkCanvas="{x:Bind inkCanvas}" />
+            <InkToolbar x:Name="inkToolbar" VerticalAlignment="Top" TargetInkCanvas="{x:Bind inkCanvas}" >
+                <InkToolbarCustomToggleButton x:Name="showhidewhite" FontFamily="segoe mdl2 assets" Content="&#xE77f;" Checked="showwhite" Unchecked="hidewhite" />
+                <InkToolbarCustomToolButton x:Name="recognize" FontFamily="segoe mdl2 assets" Content="&#xE185;" Visibility="Visible" Click="recognizetext"/>
+            </InkToolbar>
+            <!--<InkToolbar x:Name="inkToolbar2" VerticalAlignment="Top">
+                <InkToolbarCustomToggleButton x:Name="writeki" FontFamily="segoe mdl2 assets" Content="&#xE104;" Checked="writerec" Unchecked="drawnorec"/>
+                <InkToolbarCustomToolButton x:Name="recognize" FontFamily="segoe mdl2 assets" Content="&#xE185;" Visibility="Visible" Click="recognizetext"/>
+            </InkToolbar>-->
+            <ItemsControl Grid.Row="1" x:Name="rectangleItems" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <ItemsControl.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition/>
+                    </TransitionCollection>
+                </ItemsControl.ItemContainerTransitions>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Height="200"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Items>
+                    
+                </ItemsControl.Items>
+            </ItemsControl>
+
         </Grid>
         <SplitView x:Name="spv" Margin="0,50,0,0" Grid.Row="1" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="50" HorizontalAlignment="Left" PaneBackground="#FFD9ECF8">
             <SplitView.Pane>
@@ -260,5 +278,9 @@
                 </ListBox>
             </SplitView.Pane>
         </SplitView>
+        <Grid x:Name="blanc" Background="#7FFFFFFF" Visibility="Visible">
+            
+        </Grid>
     </Grid>
+    
 </Page>

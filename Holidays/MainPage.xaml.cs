@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Credentials.UI;
+using Windows.UI;
+using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +28,13 @@ namespace Holidays
         public MainPage()
         {
             this.InitializeComponent();
+            Button signinagain = new Button();
+            signinagain.Content = "Sign in";
+            signinagain.HorizontalAlignment = HorizontalAlignment.Center;
+            signinagain.VerticalAlignment = VerticalAlignment.Center;
+            signinagain.Click += Signinagain_Click;
+            blanc.Children.Add(signinagain);
+            signin();
 
             inkCanvas.InkPresenter.InputDeviceTypes =
         Windows.UI.Core.CoreInputDeviceTypes.Mouse |
@@ -42,11 +52,101 @@ namespace Holidays
             var daytoday =
                 now.Day;
 
+            var year = now.Year;
+            var month = now.Month;
+            var day = now.Day;
+
+
+            //DateTime date1 = new DateTime(year, month, day, 0, 0, 0);
+            DateTime date1 = new DateTime(2017, 12, 25, 0, 0, 0);
+            //days.Text = $"{date1}";
+            DateTime date2 = new DateTime(year, month, day, 0, 0, 0);
+            //days.Text = $"{date2}";
+            //int result = DateTime.Compare(date1, date2);
+            //string relationship;
+
+            //if (result == 0)
+            //days.Text = "0";
+            //else
+
+            TimeSpan duration = date1 - date2;
+
+
+            days.Text = $"{ duration.Days }";
+
+
             var daysleft = 25 - daytoday;
 
-            days.Text = $"{ daysleft }";
+            //days.Text = "--";
+            //days.Text = $"{ daysleft }";
         }
 
+        public async void signin()
+        {
+            UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync("Please sign in");
+            if (consentResult.Equals(UserConsentVerificationResult.Verified))
+            {
+
+                // continue
+                //master10.Children.Clear();
+                blanc.Visibility = Visibility.Collapsed;
+            }
+
+            else
+            {
+                blanc.Visibility = Visibility.Visible;
+                /*
+                Grid white = new Grid();
+                white.Background = new SolidColorBrush(Color.FromArgb(10,0,0,0));
+                //white.Opacity = 10;
+                master10.Children.Add(white);
+
+                Button signinagain = new Button();
+                signinagain.Content = "Sign in";
+                signinagain.HorizontalAlignment = HorizontalAlignment.Center;
+                signinagain.VerticalAlignment = VerticalAlignment.Center;
+                signinagain.Click += Signinagain_Click;
+                white.Children.Add(signinagain);
+                */
+            }
+        }
+
+        private void Signinagain_Click(object sender, RoutedEventArgs e)
+        {
+            signin();
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            // Only get results when it was a user typing,
+            // otherwise assume the value got filled in by TextMemberPath
+            // or the handler for SuggestionChosen.
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+
+                //Set the ItemsSource to be your filtered dataset
+                //sender.ItemsSource = dataset;
+            }
+        }
+
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            // Set sender.Text. You can use args.SelectedItem to build your text string.
+        }
+
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null)
+            {
+                // User selected an item from the suggestion list, take an action on it here.
+            }
+            else
+            {
+                // Use args.QueryText to determine what to do.
+            }
+        }
 
         private void opensplitview(object sender, RoutedEventArgs e)
         {
@@ -90,7 +190,7 @@ namespace Holidays
                 inkg.Visibility = Visibility.Collapsed;
             }
 
-            if(movies.IsSelected == true)
+            if (movies.IsSelected == true)
             {
                 mastergrid.Visibility = Visibility.Collapsed;
                 cmg.Visibility = Visibility.Collapsed;
@@ -141,5 +241,103 @@ namespace Holidays
                  */
             }
         }
+
+        private void showwhite(object sender, RoutedEventArgs e)
+        {
+            backg.Visibility = Visibility.Visible;
+        }
+
+        private void hidewhite(object sender, RoutedEventArgs e)
+        {
+            backg.Visibility = Visibility.Collapsed;
+        }
+
+        private void writerec(object sender, RoutedEventArgs e)
+        {
+            //recognize.Visibility = Visibility.Visible;
+        }
+
+        private void drawnorec(object sender, RoutedEventArgs e)
+        {
+            //recognize.Visibility = Visibility.Collapsed;
+        }
+
+        //string newstr = "";
+
+        private async void recognizetext(object sender, RoutedEventArgs e)
+        {
+            if (rectangleItems.Items.Count > 0)
+            {
+                rectangleItems.Items.Clear();
+            }
+
+            // Get all strokes on the InkCanvas.
+            IReadOnlyList<InkStroke> currentStrokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
+
+
+            // Ensure an ink stroke is present.
+            if (currentStrokes.Count > 0)
+            {
+                // Create a manager for the InkRecognizer object
+                // used in handwriting recognition.
+                InkRecognizerContainer inkRecognizerContainer =
+                    new InkRecognizerContainer();
+
+                // inkRecognizerContainer is null if a recognition engine is not available.
+                if (!(inkRecognizerContainer == null))
+                {
+                    // Recognize all ink strokes on the ink canvas.
+                    IReadOnlyList<InkRecognitionResult> recognitionResults =
+                        await inkRecognizerContainer.RecognizeAsync(
+                            inkCanvas.InkPresenter.StrokeContainer,
+                            InkRecognitionTarget.All);
+                    // Process and display the recognition results.
+                    if (recognitionResults.Count > 0)
+                    {
+                        //string str = "Recognition result\n";
+                        // Iterate through the recognition results.
+                        foreach (var result in recognitionResults)
+                        {
+                            // Get all recognition candidates from each recognition result.
+                            IReadOnlyList<string> candidates = result.GetTextCandidates();
+                            //str += "Candidates: " + candidates.Count.ToString() + "\n";
+                            foreach (string candidate in candidates)
+                            {
+                                Button ncan = new Button();
+                                ncan.Content = candidate;
+                                ncan.Click += Ncan_Click;
+                                //newstr += ncan.Content + " ";
+                                rectangleItems.Items.Add(ncan);
+                                //str += candidate + " ";
+                            }
+                        }
+                        // Display the recognition candidates.
+                        //recognitionResult.Text = str;
+                        // Clear the ink canvas once recognition is complete.
+                        inkCanvas.InkPresenter.StrokeContainer.Clear();
+                    }
+                    else
+                    {
+                        //recognitionResult.Text = "No recognition results.";
+                    }
+                }
+                else
+                {
+                    Windows.UI.Popups.MessageDialog messageDialog = new Windows.UI.Popups.MessageDialog("You must install handwriting recognition engine.");
+                    await messageDialog.ShowAsync();
+                }
+            }
+            else
+            {
+                //recognitionResult.Text = "No ink strokes to recognize.";
+            }
+        }
+
+        private void Ncan_Click(object sender, RoutedEventArgs e)
+        {
+            //recognitionResult.Text = newstr;
+
+        }
+
     }
 }

@@ -31,7 +31,8 @@ namespace Holidays
             ReadTimestamp();
         }
 
-        
+        //string ewitem;
+        string items;
 
         async void ReadTimestamp()
         {
@@ -47,6 +48,13 @@ namespace Holidays
                     newcheckbox.FontFamily = new FontFamily("Tempus Sans ITC");
                     newcheckbox.Content = $"{timestamp}";
                     list1.Children.Add(newcheckbox);
+
+                    /*
+                    foreach (Char l in items)
+                    {
+                        
+                    }
+                    */
                 }
             }
             catch (Exception)
@@ -54,6 +62,8 @@ namespace Holidays
                 // Timestamp not found
             }
         }
+
+        
 
         private async void addchb(object sender, RoutedEventArgs e)
         {
@@ -80,8 +90,9 @@ namespace Holidays
                 //newcheckbox.Content = $"{name10}";
                 //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
                 //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
-                string lines = (newcheckbox.Content).ToString();
-                await FileIO.WriteTextAsync(sampleFile, $"{lines}");
+                //string ewitem = (newcheckbox.Content).ToString();
+                items += (newcheckbox.Content).ToString() + "\n";
+                await FileIO.WriteTextAsync(sampleFile, $"{items}");
                 //File.WriteAllLines(sampleFile, $"{lines}");
                 list1.Children.Add(newcheckbox);
             }
