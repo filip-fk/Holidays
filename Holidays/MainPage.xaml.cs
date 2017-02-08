@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
 using Windows.Security.Credentials.UI;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
@@ -28,6 +30,10 @@ namespace Holidays
         public MainPage()
         {
             this.InitializeComponent();
+            connectioncheck1();
+
+            /*
+            blanc.Visibility = Visibility.Visible;
             Button signinagain = new Button();
             signinagain.Content = "Sign in";
             signinagain.HorizontalAlignment = HorizontalAlignment.Center;
@@ -35,6 +41,7 @@ namespace Holidays
             signinagain.Click += Signinagain_Click;
             blanc.Children.Add(signinagain);
             signin();
+            */
 
             inkCanvas.InkPresenter.InputDeviceTypes =
         Windows.UI.Core.CoreInputDeviceTypes.Mouse |
@@ -81,8 +88,49 @@ namespace Holidays
             //days.Text = $"{ daysleft }";
         }
 
+        public async void connectioncheck1()
+        {
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.txt");
+            String timestamp = await FileIO.ReadTextAsync(sampleFile);
+
+            /*
+            DispatcherTimer dispatcherTimer;
+            DateTimeOffset startTime;
+            DateTimeOffset stopTime;
+
+            dispatcherTimer = new DispatcherTimer();
+            //dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            startTime = DateTimeOffset.Now;
+            dispatcherTimer.Start();
+            if (dispatcherTimer.Equals(20))
+            {
+                dispatcherTimer.Stop();
+                connflyout.Visibility = Visibility.Collapsed;
+            }
+            //IsEnabled should now be true after calling start
+            */
+            
+            if ($"{timestamp}" == "No internet")
+            {
+                connection.Visibility = Visibility.Visible;
+                connection.Text = "❌";
+                connection.Visibility = Visibility.Visible;
+                connectionstatusflyout.Content = "❌ No internet";
+            }
+
+            else
+            {
+                connection.Text = "✔";
+                connection.Visibility = Visibility.Visible;
+            }
+        }
+
         public async void signin()
         {
+        }
+        /*{
             UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync("Please sign in");
             if (consentResult.Equals(UserConsentVerificationResult.Verified))
             {
@@ -107,7 +155,7 @@ namespace Holidays
                 signinagain.VerticalAlignment = VerticalAlignment.Center;
                 signinagain.Click += Signinagain_Click;
                 white.Children.Add(signinagain);
-                */
+                
             }
         }
 
@@ -115,24 +163,30 @@ namespace Holidays
         {
             signin();
         }
+*/
+
+        private string[] selectionItems = new string[] { "Weather", "try 2", "random 3", "my 4" };
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            // Only get results when it was a user typing,
-            // otherwise assume the value got filled in by TextMemberPath
-            // or the handler for SuggestionChosen.
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-
-                //Set the ItemsSource to be your filtered dataset
-                //sender.ItemsSource = dataset;
-            }
+            var autoSuggestBox = (AutoSuggestBox)sender;
+            var filtered = selectionItems.Where(p => p.StartsWith(autoSuggestBox.Text)).ToArray();
+            autoSuggestBox.ItemsSource = filtered;
         }
 
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            // Set sender.Text. You can use args.SelectedItem to build your text string.
+            if (sugg.Text == "Weather")
+            {
+                mastergrid.Visibility = Visibility.Collapsed;
+                cmg.Visibility = Visibility.Collapsed;
+                shmg.Visibility = Visibility.Collapsed;
+                mvg.Visibility = Visibility.Collapsed;
+                msg.Visibility = Visibility.Collapsed;
+                wthg.Visibility = Visibility.Visible;
+                inkg.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -339,5 +393,14 @@ namespace Holidays
 
         }
 
+        private void svp_sc2(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void hideflyout(object sender, RoutedEventArgs e)
+        {
+            connflyout.Hide();
+        }
     }
 }

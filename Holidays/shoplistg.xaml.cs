@@ -29,38 +29,68 @@ namespace Holidays
         {
             this.InitializeComponent();
             ReadTimestamp();
+            var chil = list1.Children.Count();
+            numoflist.Text = "("+$"{chil}"+")";
         }
 
         //string ewitem;
         string items;
 
+        Windows.Storage.ApplicationDataContainer localSettings =
+    Windows.Storage.ApplicationData.Current.LocalSettings;
+        Windows.Storage.StorageFolder localFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+
         async void ReadTimestamp()
         {
+            object value = localSettings.Values["exampleSetting"];
+            var forstring = value.ToString();
+            string value1 = forstring;
+
+            if (value != null)
+            {
+                foreach (var result in value1)
+                {
+                    CheckBox newcheckbox = new CheckBox();
+                    newcheckbox.FontFamily = new FontFamily("Tempus Sans ITC");
+                    newcheckbox.Content = result;
+                    //newcheckbox.Content = $"{value}";
+                    list1.Children.Add(newcheckbox);
+                }
+            }
+
+            else { }
+
+            /*
             try
             {
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-                StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.cs");
+                StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.txt");
                 String timestamp = await FileIO.ReadTextAsync(sampleFile);
                 // Data is contained in timestamp
                 if ($"{timestamp}" != "")
                 {
-                    CheckBox newcheckbox = new CheckBox();
-                    newcheckbox.FontFamily = new FontFamily("Tempus Sans ITC");
-                    newcheckbox.Content = $"{timestamp}";
-                    list1.Children.Add(newcheckbox);
+                    
 
-                    /*
-                    foreach (Char l in items)
+                    
+                    foreach (char m in timestamp)
                     {
-                        
+                        CheckBox newcheckbox = new CheckBox();
+                        newcheckbox.FontFamily = new FontFamily("Tempus Sans ITC");
+                        newcheckbox.Content = $"{timestamp}";
+                        list1.Children.Add(newcheckbox);
                     }
-                    */
+
+                    var num = list1.Children.Count();
+                    numoflist.Text = "(" + $"{num}" + ")";
                 }
             }
             catch (Exception)
             {
                 // Timestamp not found
             }
+
+            */
         }
 
         
@@ -75,29 +105,59 @@ namespace Holidays
 
             else
             {
-                ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
-                
-                StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.cs", CreationCollisionOption.ReplaceExisting);
-                //var name10 = sampleFile.Name;
+                if (newname.Text == "")
+                {
+                    ContentDialog deleteFileDialog = new ContentDialog()
+                    {
+                        Title = "Nothing to add!",
+                        PrimaryButtonText = "Ok",
+                        IsSecondaryButtonEnabled = false
+                    };
 
-                //, CreationCollisionOption.ReplaceExisting
+                    ContentDialogResult result = await deleteFileDialog.ShowAsync();
+                }
 
-                newname.Visibility = Visibility.Collapsed;
-                btntext.Text = "Add item";
-                CheckBox newcheckbox = new CheckBox();
-                newcheckbox.FontFamily = new FontFamily("Tempus Sans ITC");
-                newcheckbox.Content = newname.Text;
-                //newcheckbox.Content = $"{name10}";
-                //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
-                //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
-                //string ewitem = (newcheckbox.Content).ToString();
-                items += (newcheckbox.Content).ToString() + "\n";
-                await FileIO.WriteTextAsync(sampleFile, $"{items}");
-                //File.WriteAllLines(sampleFile, $"{lines}");
-                list1.Children.Add(newcheckbox);
+                else
+                {
+                    /*
+                      Windows.Storage.StorageFolder localFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+                    ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
+
+                    StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt", CreationCollisionOption.ReplaceExisting);
+
+                    */
+
+
+
+                    //var name10 = sampleFile.Name;
+
+                    //, CreationCollisionOption.ReplaceExisting
+
+                    newname.Visibility = Visibility.Collapsed;
+                    btntext.Text = "Add item";
+                    CheckBox newcheckbox = new CheckBox();
+                    newcheckbox.FontFamily = new FontFamily("Tempus Sans ITC");
+                    newcheckbox.Content = newname.Text;
+                    //newcheckbox.Content = $"{name10}";
+                    //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
+                    //await FileIO.WriteTextAsync(sampleFile, $"{newcheckbox.Content}");
+                    //string ewitem = (newcheckbox.Content).ToString();
+                    items += (newcheckbox.Content).ToString() + "\n";
+                    localSettings.Values["exampleSetting"] = items;
+                    // !!! await FileIO.WriteTextAsync(sampleFile, $"{items}");
+
+                    //File.WriteAllLines(sampleFile, $"{lines}");
+                    list1.Children.Add(newcheckbox);
+                    var chil = list1.Children.Count();
+                    numoflist.Text = "(" + $"{chil}" + ")";
+                }
             }
 
         }
+
+        private void save_click(object sender, RoutedEventArgs e)
+        { }
 
         private void save_edit(object sender, RoutedEventArgs e)
         {
@@ -166,19 +226,20 @@ namespace Holidays
                     if (result == ContentDialogResult.Primary)
                     {
                         list1.Children.Clear();
+                        var chil = list1.Children.Count();
+                        numoflist.Text = "(" + $"{chil}" + ")";
 
+
+                        /*
                         ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
                         StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt", CreationCollisionOption.ReplaceExisting);
                         await FileIO.WriteTextAsync(sampleFile, "");
                         //lokalsettings.DeleteContainer("exampleContainer");
+                        */
+
                     }
                 }
             }
         }
-
-        Windows.Storage.ApplicationDataContainer localSettings =
-    Windows.Storage.ApplicationData.Current.LocalSettings;
-        Windows.Storage.StorageFolder localFolder =
-            Windows.Storage.ApplicationData.Current.LocalFolder;
     }
 }

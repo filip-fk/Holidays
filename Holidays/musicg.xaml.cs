@@ -277,7 +277,9 @@ namespace Holidays
 
 
         StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-        
+
+        private void save_click(object sender, RoutedEventArgs e)
+        { }
 
         private async void play(object sender, RoutedEventArgs e)
         {
@@ -285,13 +287,13 @@ namespace Holidays
 
             if (uriid != null)
             {
-                ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
-                StorageFile sampleFile = await localFolder.CreateFileAsync("savedvideoid.cs", CreationCollisionOption.ReplaceExisting);
+                //ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
+                //StorageFile sampleFile = await localFolder.CreateFileAsync("savedvideoid.cs", CreationCollisionOption.ReplaceExisting);
 
                 //RootObject1.
 
-                string lines = (vdid.Text).ToString();
-                await FileIO.WriteTextAsync(sampleFile, $"{lines}");
+                //string lines = (vdid.Text).ToString();
+                //await FileIO.WriteTextAsync(sampleFile, $"{lines}");
 
 
                 video.HorizontalAlignment = HorizontalAlignment.Center;
@@ -316,10 +318,10 @@ namespace Holidays
                 syi.HorizontalAlignment = HorizontalAlignment.Left;
                 newstp1.Children.Add(syi);
 
-                TextBlock newbtn = new TextBlock();
-                newbtn.FontFamily = new FontFamily("Tempus Sans ITC");
-                newbtn.HorizontalAlignment = HorizontalAlignment.Left;
-                newstp1.Children.Add(newbtn);
+                TextBlock newtxb = new TextBlock();
+                newtxb.FontFamily = new FontFamily("Tempus Sans ITC");
+                newtxb.HorizontalAlignment = HorizontalAlignment.Left;
+                newstp1.Children.Add(newtxb);
 
                 MediaPlayerElement ytbplayer = new MediaPlayerElement();
                 ytbplayer.AreTransportControlsEnabled = true;
@@ -335,8 +337,10 @@ namespace Holidays
                 {
                     ytbplayer.Source = MediaSource.CreateFromUri(videoUri.Uri);
                     ytbplayer.AutoPlay = true;
-                    newbtn.Text = "    " + nameofvideoyt;
+                    newtxb.Text = "    " + nameofvideoyt;
                 }
+
+                
             }
         }
     }

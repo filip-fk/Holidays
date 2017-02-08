@@ -92,9 +92,18 @@
         </VisualStateManager.VisualStateGroups>
         <Grid VerticalAlignment="Top" Height="50" Background="#3300A2FF">
             <Button Height="50" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#3300A2FF" Content="&#xE700;" FontFamily="segoe mdl2 assets" FontSize="25" Click="opensplitview"/>
-            <AutoSuggestBox VerticalAlignment="Center" Margin="0,0,5,0" PlaceholderText="Search" QueryIcon="Find" Width="200" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" SuggestionChosen="AutoSuggestBox_SuggestionChosen" HorizontalAlignment="Right"/>
-            
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                <AutoSuggestBox x:Name="sugg" VerticalAlignment="Center" Margin="0,0,5,0" PlaceholderText="Search" QueryIcon="Find" Width="200" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" SuggestionChosen="AutoSuggestBox_SuggestionChosen" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="connection" Visibility="Collapsed" Margin="10,0" FontFamily="Tempus Sans ITC" Text="✔" VerticalAlignment="Center" ToolTipService.ToolTip="Connection"/>
+            </StackPanel>
         </Grid>
+        <FlyoutPresenter HorizontalAlignment="Right" Margin="0,90,5,0" Height="70" VerticalAlignment="Top" Visibility="Visible">
+            <Flyout x:Name="connflyout">
+                <StackPanel>
+                    <Button x:Name="connectionstatusflyout" Content="" FontFamily="Tempus Sans ITC" Background="{x:Null}" Click="hideflyout"/>
+                </StackPanel>
+            </Flyout>
+        </FlyoutPresenter>
         <TextBlock x:Name="Greeting" Margin="0,55,0,0" Text="" FontSize="22" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Tempus Sans ITC" FontWeight="Bold"/>
         <ScrollViewer Margin="0,50,0,0" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="200">
             <StackPanel>
@@ -232,53 +241,72 @@
         </Grid>
         <SplitView x:Name="spv" Margin="0,50,0,0" Grid.Row="1" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="50" HorizontalAlignment="Left" PaneBackground="#FFD9ECF8">
             <SplitView.Pane>
-                <ListBox SelectionMode="Single" Name="iconslist" SelectionChanged="svp_sc" Background="{x:Null}">
-                    <ListBoxItem Name="home" IsSelected="True">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE10f;" FontSize="24"/>
-                            <TextBlock x:Name="homes" Text="Home" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="calendar">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE163;" FontSize="24"/>
-                            <TextBlock Text="Calendar" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="shoplidt">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE179;" FontSize="24"/>
-                            <TextBlock Text="Shopping list" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="movies">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE173;" FontSize="24"/>
-                            <TextBlock Text="Movies" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="music">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xEc4f;" FontSize="24"/>
-                            <TextBlock Text="Musik" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="weather">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xec8a;" FontSize="24"/>
-                            <TextBlock Text="Weather" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="ink">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="segoe mdl2 assets" Text="&#xedc6;" FontSize="24"/>
-                            <TextBlock Text="Ink workplace" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                </ListBox>
+                <Grid>
+                    <ListBox SelectionMode="Single" Name="iconslist" SelectionChanged="svp_sc" Background="{x:Null}">
+                        <ListBoxItem Name="home" IsSelected="True">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE10f;" FontSize="24"/>
+                                <TextBlock x:Name="homes" Text="Home" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="calendar">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE163;" FontSize="24"/>
+                                <TextBlock Text="Calendar" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="shoplidt">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE179;" FontSize="24"/>
+                                <TextBlock Text="Shopping list" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="movies">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xE173;" FontSize="24"/>
+                                <TextBlock Text="Movies" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="music">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xEc4f;" FontSize="24"/>
+                                <TextBlock Text="Musik" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="weather">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xec8a;" FontSize="24"/>
+                                <TextBlock Text="Weather" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="ink">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xedc6;" FontSize="24"/>
+                                <TextBlock Text="Ink workplace" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                    <ListBox SelectionMode="Single" Name="bottom" SelectionChanged="svp_sc2" Background="{x:Null}" VerticalAlignment="Bottom" BorderThickness="0,0.2,0,0" BorderBrush="#FF959595">
+                        <ListBoxItem Name="profile" IsSelected="False">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid>
+                                    <TextBlock FontFamily="segoe mdl2 assets" Text="&#xe13d;" FontSize="24"/>
+                                    <Image/>
+                                </Grid>
+                                <TextBlock Text="" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="settings" IsSelected="False">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="segoe mdl2 assets" Text="&#xe115;" FontSize="24"/>
+                                <TextBlock Text="Settings" Margin="20,0,0,0" FontSize="20" FontFamily="Tempus Sans ITC"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </Grid>
             </SplitView.Pane>
         </SplitView>
-        <Grid x:Name="blanc" Background="#7FFFFFFF" Visibility="Visible">
+        <Grid x:Name="blanc" Background="#7FFFFFFF" Visibility="Collapsed">
             
         </Grid>
     </Grid>

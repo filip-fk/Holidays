@@ -7,6 +7,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -39,6 +41,7 @@ namespace Holidays
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            connectioncheck();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -101,6 +104,56 @@ namespace Holidays
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        public async void connectioncheck()
+        {
+            string connectionProfileInfo = string.Empty;
+            try
+            {
+                ConnectionProfile InternetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+                if (InternetConnectionProfile == null)
+                {
+                    Windows.Storage.StorageFolder localFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+                    ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
+
+                    StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt", CreationCollisionOption.ReplaceExisting);
+                    await FileIO.WriteTextAsync(sampleFile, "No internet");
+                    //no internet
+
+                    ContentDialog deleteFileDialog = new ContentDialog()
+                    {
+                        Title = "No internet",
+                        PrimaryButtonText = "Cancel",
+                        IsSecondaryButtonEnabled = false
+                    };
+
+                    ContentDialogResult result = await deleteFileDialog.ShowAsync();
+                }
+                else
+                {
+                    //connection ok
+                    Windows.Storage.StorageFolder localFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+                    ApplicationDataContainer lokalsettings = ApplicationData.Current.LocalSettings;
+
+                    StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt", CreationCollisionOption.ReplaceExisting);
+                    await FileIO.WriteTextAsync(sampleFile, "Internet ok");
+                }
+            }
+            catch (Exception ex)
+            {
+                ContentDialog deleteFileDialog = new ContentDialog()
+                {
+                    Title = ("Unexpected exception occurred: " + ex.ToString()),
+                    PrimaryButtonText = "Delete",
+                    SecondaryButtonText = "Cancel"
+                };
+
+                ContentDialogResult result = await deleteFileDialog.ShowAsync();
+            }
         }
     }
 }

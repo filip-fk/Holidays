@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -210,132 +211,143 @@ namespace Holidays
 
         public async void Button_Click()
         {
-            var position = await LocationManager.GetPosition();
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile sampleFile = await localFolder.GetFileAsync("dataFile.txt");
+            String timestamp = await FileIO.ReadTextAsync(sampleFile);
 
-            //ResultTextBlock.Text = $"{position.Coordinate.Latitude}" +", "+$"{position.Coordinate.Longitude}";
+            if ($"{timestamp}" == "No internet")
+            { }
 
-            RootObject myWeather = await OpenWeatherMapProxy.GetWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
-
-            string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.list[0].weather[0].icon);
-            ResultImage1.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            
-            degreesmnd1.Text =((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd1.Text =((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm1.Text = myWeather.list[0].weather[0].description;
-
-            
-             ResultImage2.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd2.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd2.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm2.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage3.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd3.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd3.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm3.Text = myWeather.list[0].weather[0].description;
-
-
-            ResultImage4.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd4.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd4.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm4.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage5.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd5.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd5.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm5.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage6.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd6.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd6.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm6.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage7.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd7.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd7.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm7.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage8.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd8.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd8.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm8.Text = myWeather.list[0].weather[0].description;
-
-
-            ResultImage9.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd9.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd9.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm9.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage10.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            degreesmnd10.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd10.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm10.Text = myWeather.list[0].weather[0].description;
-
-             
-
-            /*
-
-            ResultImage2.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/10d.png", UriKind.Absolute));
-            degreesmnd2.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd2.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm2.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage3.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/04n.png", UriKind.Absolute));
-            degreesmnd3.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd3.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm3.Text = myWeather.list[0].weather[0].description;
-
-
-            ResultImage4.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/01n.png", UriKind.Absolute));
-            degreesmnd4.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd4.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm4.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage5.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/11n.png", UriKind.Absolute));
-            degreesmnd5.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd5.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm5.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage6.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/50d.png", UriKind.Absolute));
-            degreesmnd6.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd6.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm6.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage7.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/10n.png", UriKind.Absolute));
-            degreesmnd7.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd7.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm7.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage8.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/01d.png", UriKind.Absolute));
-            degreesmnd8.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd8.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm8.Text = myWeather.list[0].weather[0].description;
-
-
-            ResultImage9.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/03d.png", UriKind.Absolute));
-            degreesmnd9.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd9.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm9.Text = myWeather.list[0].weather[0].description;
-
-            ResultImage10.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/02n.png", UriKind.Absolute));
-            degreesmnd10.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
-            degreesmxd10.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
-            comm10.Text = myWeather.list[0].weather[0].description;
-
-            */
-
-
-            /*
-            if (mwg.Width == 300)
+            else
             {
 
-            }
+                var position = await LocationManager.GetPosition();
 
-            else if (mwg.Width > 300)
-            {
-                degreesmxd4.Text = ((int)myWeather.main.temp_max + 4).ToString();
+                //ResultTextBlock.Text = $"{position.Coordinate.Latitude}" +", "+$"{position.Coordinate.Longitude}";
+
+                RootObject myWeather = await OpenWeatherMapProxy.GetWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
+
+                string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.list[0].weather[0].icon);
+                ResultImage1.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+
+                degreesmnd1.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd1.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm1.Text = myWeather.list[0].weather[0].description;
+
+
+                ResultImage2.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd2.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd2.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm2.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage3.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd3.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd3.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm3.Text = myWeather.list[0].weather[0].description;
+
+
+                ResultImage4.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd4.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd4.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm4.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage5.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd5.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd5.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm5.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage6.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd6.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd6.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm6.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage7.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd7.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd7.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm7.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage8.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd8.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd8.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm8.Text = myWeather.list[0].weather[0].description;
+
+
+                ResultImage9.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd9.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd9.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm9.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage10.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                degreesmnd10.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd10.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm10.Text = myWeather.list[0].weather[0].description;
+
+
+
+                /*
+
+                ResultImage2.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/10d.png", UriKind.Absolute));
+                degreesmnd2.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd2.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm2.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage3.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/04n.png", UriKind.Absolute));
+                degreesmnd3.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd3.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm3.Text = myWeather.list[0].weather[0].description;
+
+
+                ResultImage4.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/01n.png", UriKind.Absolute));
+                degreesmnd4.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd4.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm4.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage5.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/11n.png", UriKind.Absolute));
+                degreesmnd5.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd5.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm5.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage6.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/50d.png", UriKind.Absolute));
+                degreesmnd6.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd6.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm6.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage7.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/10n.png", UriKind.Absolute));
+                degreesmnd7.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd7.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm7.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage8.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/01d.png", UriKind.Absolute));
+                degreesmnd8.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd8.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm8.Text = myWeather.list[0].weather[0].description;
+
+
+                ResultImage9.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/03d.png", UriKind.Absolute));
+                degreesmnd9.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd9.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm9.Text = myWeather.list[0].weather[0].description;
+
+                ResultImage10.Source = new BitmapImage(new Uri("ms-appx:///Assets/Weather/02n.png", UriKind.Absolute));
+                degreesmnd10.Text = ((int)myWeather.list[0].main.temp_min - 1).ToString();
+                degreesmxd10.Text = ((int)myWeather.list[0].main.temp_max + 1).ToString();
+                comm10.Text = myWeather.list[0].weather[0].description;
+
+                */
+
+
+                /*
+                if (mwg.Width == 300)
+                {
+
+                }
+
+                else if (mwg.Width > 300)
+                {
+                    degreesmxd4.Text = ((int)myWeather.main.temp_max + 4).ToString();
+                }
+                */
             }
-            */
         }
     }
 }

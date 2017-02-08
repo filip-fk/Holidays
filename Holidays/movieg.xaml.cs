@@ -29,6 +29,12 @@ namespace Holidays
             this.InitializeComponent();
         }
 
+        private void save_click(object sender, RoutedEventArgs e)
+        { }
+
+        private void saveedit_click(object sender, RoutedEventArgs e)
+        { }
+
         private async void addchb(object sender, RoutedEventArgs e)
         {
             {
